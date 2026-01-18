@@ -1,0 +1,542 @@
+<form [formGroup]="form" class="space-y-6" novalidate (ngSubmit)="onSubmit()">
+  <div
+    class="flex flex-wrap items-center justify-between gap-3 rounded-3xl border border-rose-100 bg-rose-50/60 p-4 shadow-sm"
+  >
+    <div class="space-y-1">
+      <p class="text-xs font-semibold uppercase tracking-wide text-rose-700">Quick presets</p>
+      <p class="text-sm text-slate-700">
+        Load a known-good config, then tweak the knobs before running.
+      </p>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      @for (preset of presets; track preset.name) {
+      <button
+        type="button"
+        class="rounded-full bg-white px-4 py-2 text-xs font-semibold uppercase tracking-wide text-rose-700 ring-1 ring-rose-200 transition hover:bg-rose-100/80"
+        (click)="loadPreset(preset)"
+      >
+        {{ preset.name }}
+      </button>
+      }
+    </div>
+  </div>
+
+  <div class="grid gap-6 lg:grid-cols-3">
+    <div class="lg:col-span-2 space-y-6">
+      <section
+        class="space-y-5 rounded-3xl border border-slate-100 bg-white/90 p-6 shadow-sm backdrop-blur"
+      >
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wide text-rose-700">
+              Product blueprint
+            </p>
+            <p class="text-sm text-slate-600">
+              Start simple: equal distribution, no variants. Layer odds and guarantees after.
+            </p>
+          </div>
+          <span
+            class="rounded-full bg-rose-50 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-rose-700 ring-1 ring-rose-100"
+          >
+            Phase 1
+          </span>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          <label class="space-y-2">
+            <span class="text-xs font-semibold uppercase tracking-wide text-slate-600">
+              Product name
+            </span>
+            <input
+              type="text"
+              formControlName="productName"
+              class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 shadow-inner shadow-slate-100 focus:border-rose-400 focus:outline-none focus:ring-2 focus:ring-rose-100"
+              placeholder="2025 Apex Baseball — Hobby"
+            />
+          </label>
+          <label class="space-y-2">
+            <span class="text-xs font-semibold uppercase tracking-wide text-slate-600">
+              Random seed
+            </span>
+            <input
+              type="text"
+              formControlName="randomSeed"
+              class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 shadow-inner shadow-slate-100 focus:border-rose-400 focus:outline-none focus:ring-2 focus:ring-rose-100"
+              placeholder="seed-2025"
+            />
+          </label>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-4">
+          <label class="space-y-2">
+            <span class="text-xs font-semibold uppercase tracking-wide text-slate-600">
+              Boxes per case
+            </span>
+            <input
+              type="number"
+              min="1"
+              formControlName="boxesPerCase"
+              class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 shadow-inner shadow-slate-100 focus:border-rose-400 focus:outline-none focus:ring-2 focus:ring-rose-100"
+            />
+          </label>
+          <label class="space-y-2">
+            <span class="text-xs font-semibold uppercase tracking-wide text-slate-600">
+              Packs per box
+            </span>
+            <input
+              type="number"
+              min="1"
+              formControlName="packsPerBox"
+              class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 shadow-inner shadow-slate-100 focus:border-rose-400 focus:outline-none focus:ring-2 focus:ring-rose-100"
+            />
+          </label>
+          <label class="space-y-2">
+            <span class="text-xs font-semibold uppercase tracking-wide text-slate-600">
+              Cards per pack
+            </span>
+            <input
+              type="number"
+              min="1"
+              formControlName="cardsPerPack"
+              class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 shadow-inner shadow-slate-100 focus:border-rose-400 focus:outline-none focus:ring-2 focus:ring-rose-100"
+            />
+          </label>
+          <label class="space-y-2">
+            <span class="text-xs font-semibold uppercase tracking-wide text-slate-600">
+              Checklist size
+            </span>
+            <input
+              type="number"
+              min="1"
+              formControlName="checklistSize"
+              class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 shadow-inner shadow-slate-100 focus:border-rose-400 focus:outline-none focus:ring-2 focus:ring-rose-100"
+            />
+          </label>
+        </div>
+
+        <div class="grid gap-4 lg:grid-cols-2">
+          <div class="rounded-2xl border border-slate-100 bg-slate-50/60 p-4">
+            <p class="text-xs font-semibold uppercase tracking-wide text-slate-600">
+              Print strategy
+            </p>
+            <div class="mt-3 space-y-2">
+              <label
+                class="flex cursor-pointer items-start gap-3 rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-800 transition hover:border-rose-200 hover:bg-rose-50/60"
+              >
+                <input
+                  type="radio"
+                  class="mt-1 accent-rose-600"
+                  formControlName="printStrategy"
+                  value="print-run"
+                />
+                <div>
+                  <p class="font-semibold text-slate-900">Print-run first</p>
+                  <p class="text-xs text-slate-600">
+                    Exact counts per variant; pools must fund guarantees.
+                  </p>
+                </div>
+              </label>
+              <label
+                class="flex cursor-pointer items-start gap-3 rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-800 transition hover:border-rose-200 hover:bg-rose-50/60"
+              >
+                <input
+                  type="radio"
+                  class="mt-1 accent-rose-600"
+                  formControlName="printStrategy"
+                  value="odds-first"
+                />
+                <div>
+                  <p class="font-semibold text-slate-900">Odds-first</p>
+                  <p class="text-xs text-slate-600">
+                    Percentages per slot; convert to pools before collation.
+                  </p>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-slate-100 bg-slate-50/60 p-4">
+            <p class="text-xs font-semibold uppercase tracking-wide text-slate-600">Slot types</p>
+            <p class="mt-1 text-xs text-slate-600">
+              Slots are evaluated independently. Variants replace base slots.
+            </p>
+            <div class="mt-3 flex flex-wrap gap-2">
+              @for (type of slotOptions; track type) {
+              <button
+                type="button"
+                (click)="toggleSlotType(type)"
+                class="flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold uppercase tracking-wide ring-1 transition"
+                [ngClass]="
+                    form.controls.slotTypes.value.includes(type)
+                      ? 'bg-rose-50 text-rose-700 ring-rose-200'
+                      : 'bg-white text-slate-600 ring-slate-200 hover:ring-rose-200'
+                  "
+              >
+                <span
+                  class="h-2 w-2 rounded-full"
+                  [ngClass]="{ 'bg-rose-500': form.controls.slotTypes.value.includes(type), 'bg-slate-300': !form.controls.slotTypes.value.includes(type) }"
+                ></span>
+                {{ type | uppercase }}
+              </button>
+              }
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="space-y-5 rounded-3xl border border-slate-100 bg-white/90 p-6 shadow-sm backdrop-blur"
+      >
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wide text-rose-700">Pack recipe</p>
+            <p class="text-sm text-slate-600">
+              Slots are filled after allocation, honoring guarantees first.
+            </p>
+          </div>
+          <span
+            class="rounded-full bg-rose-50 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-rose-700 ring-1 ring-rose-100"
+          >
+            Phase 2
+          </span>
+        </div>
+
+        <div class="space-y-4" formArrayName="packSlots">
+          @for (slot of packSlots.controls; track trackSlot($index); let i = $index) {
+          <div
+            class="space-y-3 rounded-2xl border border-slate-100 bg-slate-50/70 p-4"
+            [formGroupName]="i"
+          >
+            <div class="flex flex-wrap items-start justify-between gap-3">
+              <div class="space-y-1">
+                <p class="text-xs font-semibold uppercase tracking-wide text-rose-700">
+                  Slot {{ i + 1 }}
+                </p>
+                <p class="text-sm font-semibold text-slate-900">
+                  {{ slot.controls.label.value || 'New slot' }}
+                </p>
+                <p class="text-xs text-slate-600">
+                  {{ slot.controls.notes.value || 'Describe the slot purpose and replacement rule.'
+                  }}
+                </p>
+              </div>
+              <button
+                type="button"
+                class="rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide text-slate-500 ring-1 ring-slate-200 transition hover:bg-slate-100 hover:text-slate-700"
+                (click)="removePackSlot(i)"
+                [disabled]="packSlots.length <= 1"
+              >
+                Remove
+              </button>
+            </div>
+
+            <div class="grid gap-3 md:grid-cols-2">
+              <label class="space-y-2">
+                <span class="text-xs font-semibold uppercase tracking-wide text-slate-600">
+                  Label
+                </span>
+                <input
+                  type="text"
+                  formControlName="label"
+                  class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 shadow-inner shadow-slate-100 focus:border-rose-400 focus:outline-none focus:ring-2 focus:ring-rose-100"
+                  placeholder="Base commons"
+                />
+              </label>
+              <label class="space-y-2">
+                <span class="text-xs font-semibold uppercase tracking-wide text-slate-600">
+                  Notes
+                </span>
+                <input
+                  type="text"
+                  formControlName="notes"
+                  class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 shadow-inner shadow-slate-100 focus:border-rose-400 focus:outline-none focus:ring-2 focus:ring-rose-100"
+                  placeholder="Even checklist spread across the case."
+                />
+              </label>
+            </div>
+
+            <div class="grid gap-3 md:grid-cols-3">
+              <label class="space-y-2">
+                <span class="text-xs font-semibold uppercase tracking-wide text-slate-600">
+                  Type
+                </span>
+                <select
+                  formControlName="type"
+                  class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 shadow-inner shadow-slate-100 focus:border-rose-400 focus:outline-none focus:ring-2 focus:ring-rose-100"
+                >
+                  @for (type of slotOptions; track type) {
+                  <option [ngValue]="type">{{ type | titlecase }}</option>
+                  }
+                </select>
+              </label>
+              <label class="space-y-2">
+                <span class="text-xs font-semibold uppercase tracking-wide text-slate-600">
+                  Odds
+                </span>
+                <input
+                  type="text"
+                  formControlName="odds"
+                  class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 shadow-inner shadow-slate-100 focus:border-rose-400 focus:outline-none focus:ring-2 focus:ring-rose-100"
+                  placeholder="1:6 packs"
+                />
+              </label>
+              <label class="space-y-2">
+                <span class="text-xs font-semibold uppercase tracking-wide text-slate-600">
+                  Replaces
+                </span>
+                <select
+                  formControlName="replaces"
+                  class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 shadow-inner shadow-slate-100 focus:border-rose-400 focus:outline-none focus:ring-2 focus:ring-rose-100"
+                >
+                  @for (type of slotOptions; track type) {
+                  <option [ngValue]="type">{{ type | titlecase }} slot</option>
+                  }
+                </select>
+              </label>
+            </div>
+          </div>
+          }
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <button
+            type="button"
+            (click)="addPackSlot('base')"
+            class="inline-flex items-center gap-2 rounded-full bg-rose-600 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-white shadow-sm transition hover:bg-rose-700"
+          >
+            + Base slot
+          </button>
+          <button
+            type="button"
+            (click)="addPackSlot('insert')"
+            class="inline-flex items-center gap-2 rounded-full bg-slate-900 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-white shadow-sm transition hover:bg-slate-800"
+          >
+            + Insert slot
+          </button>
+          <button
+            type="button"
+            (click)="addPackSlot('hit')"
+            class="inline-flex items-center gap-2 rounded-full bg-amber-500 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-white shadow-sm transition hover:bg-amber-600"
+          >
+            + Hit slot
+          </button>
+        </div>
+      </section>
+
+      <section
+        class="space-y-5 rounded-3xl border border-slate-100 bg-white/90 p-6 shadow-sm backdrop-blur"
+      >
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wide text-rose-700">
+              Guarantees & variance
+            </p>
+            <p class="text-sm text-slate-600">
+              Apply guarantees before shuffling packs. Add soft caps to avoid clustered cases.
+            </p>
+          </div>
+          <span
+            class="rounded-full bg-rose-50 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-rose-700 ring-1 ring-rose-100"
+          >
+            Phase 2.5
+          </span>
+        </div>
+
+        <div class="grid gap-4 md:grid-cols-3" formGroupName="guarantees">
+          <label class="space-y-2">
+            <span class="text-xs font-semibold uppercase tracking-wide text-slate-600">
+              Autos per box (guaranteed)
+            </span>
+            <input
+              type="number"
+              min="0"
+              formControlName="autosPerBox"
+              class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 shadow-inner shadow-slate-100 focus:border-rose-400 focus:outline-none focus:ring-2 focus:ring-rose-100"
+            />
+          </label>
+          <label class="space-y-2">
+            <span class="text-xs font-semibold uppercase tracking-wide text-slate-600">
+              Case hits per case
+            </span>
+            <input
+              type="number"
+              min="0"
+              formControlName="caseHitsPerCase"
+              class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 shadow-inner shadow-slate-100 focus:border-rose-400 focus:outline-none focus:ring-2 focus:ring-rose-100"
+            />
+          </label>
+          <label class="space-y-2">
+            <span class="text-xs font-semibold uppercase tracking-wide text-slate-600">
+              Low-serial cap per box
+            </span>
+            <input
+              type="number"
+              min="0"
+              formControlName="lowSerialCapPerBox"
+              class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 shadow-inner shadow-slate-100 focus:border-rose-400 focus:outline-none focus:ring-2 focus:ring-rose-100"
+            />
+          </label>
+        </div>
+
+        <div class="grid gap-4 md:grid-cols-3" formGroupName="simulation">
+          <label class="space-y-2">
+            <span class="text-xs font-semibold uppercase tracking-wide text-slate-600">
+              Cases to simulate
+            </span>
+            <input
+              type="number"
+              min="1"
+              formControlName="casesToSimulate"
+              class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 shadow-inner shadow-slate-100 focus:border-rose-400 focus:outline-none focus:ring-2 focus:ring-rose-100"
+            />
+          </label>
+          <label
+            class="flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50/70 px-4 py-3 text-sm text-slate-800"
+          >
+            <input type="checkbox" class="accent-rose-600" formControlName="reseedEachCase" />
+            <div>
+              <p class="font-semibold text-slate-900">Reseed every case</p>
+              <p class="text-xs text-slate-600">
+                Keeps runs reproducible; makes Monte Carlo runs deterministic.
+              </p>
+            </div>
+          </label>
+          <label
+            class="flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50/70 px-4 py-3 text-sm text-slate-800"
+          >
+            <input type="checkbox" class="accent-rose-600" formControlName="varianceControl" />
+            <div>
+              <p class="font-semibold text-slate-900">Apply variance control</p>
+              <p class="text-xs text-slate-600">
+                Spread top hits across cases; avoid duplicate stars in a single pack.
+              </p>
+            </div>
+          </label>
+        </div>
+      </section>
+    </div>
+
+    <aside class="space-y-4">
+      <div class="rounded-3xl bg-slate-900 p-5 text-slate-100 shadow-lg">
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wide text-emerald-300">
+              Validation sketch
+            </p>
+            <p class="text-sm text-slate-300">
+              Readiness checks that will wire to the validation layer.
+            </p>
+          </div>
+          <span
+            class="rounded-full bg-emerald-500/20 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-emerald-200 ring-1 ring-emerald-400/30"
+          >
+            Pre-flight
+          </span>
+        </div>
+
+        <div class="mt-4 space-y-3">
+          @for (check of readinessChecks(); track check.title) {
+          <div
+            class="flex items-start gap-3 rounded-2xl border border-slate-800 bg-slate-800/60 p-3"
+          >
+            <span
+              class="mt-1 h-2.5 w-2.5 rounded-full"
+              [ngClass]="{
+                  'bg-emerald-400': check.status === 'ok',
+                  'bg-amber-300': check.status === 'warn',
+                  'bg-sky-300': check.status === 'info'
+                }"
+            ></span>
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <p class="font-semibold text-slate-50">{{ check.title }}</p>
+                <span
+                  class="rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide"
+                  [ngClass]="{
+                      'bg-emerald-500/15 text-emerald-200 ring-1 ring-emerald-400/30': check.status === 'ok',
+                      'bg-amber-400/15 text-amber-200 ring-1 ring-amber-300/30': check.status === 'warn',
+                      'bg-sky-400/15 text-sky-200 ring-1 ring-sky-300/30': check.status === 'info'
+                    }"
+                >
+                  {{ check.status }}
+                </span>
+              </div>
+              <p class="text-sm text-slate-200">{{ check.detail }}</p>
+            </div>
+          </div>
+          }
+        </div>
+
+        <div
+          class="mt-5 rounded-2xl border border-slate-800 bg-slate-800/60 p-4 text-sm text-slate-200"
+        >
+          <p class="font-semibold text-slate-50">Odds / collation notes</p>
+          <ul class="mt-2 space-y-2 list-disc pl-4">
+            <li>Allocation (global) → collation (local randomness) keeps guarantees honest.</li>
+            <li>Variants should replace base slots instead of stacking odds.</li>
+            <li>Seeded randomness plus print pools = reproducible Monte Carlo runs.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="rounded-3xl border border-slate-100 bg-white/90 p-5 shadow-sm backdrop-blur">
+        <p class="text-xs font-semibold uppercase tracking-wide text-rose-700">Case footprint</p>
+        <p class="mt-1 text-sm text-slate-700">
+          Quick math on how much cardboard a single case produces.
+        </p>
+
+        <div class="mt-4 grid gap-3">
+          <div
+            class="flex items-center justify-between rounded-2xl bg-slate-50/70 px-4 py-3 text-sm text-slate-800"
+          >
+            <span class="font-semibold text-slate-900">Packs per case</span>
+            <span class="text-slate-700">{{ caseFootprint().packsPerCase | number }}</span>
+          </div>
+          <div
+            class="flex items-center justify-between rounded-2xl bg-slate-50/70 px-4 py-3 text-sm text-slate-800"
+          >
+            <span class="font-semibold text-slate-900">Cards per case</span>
+            <span class="text-slate-700">{{ caseFootprint().cardsPerCase | number }}</span>
+          </div>
+          <div class="rounded-2xl bg-slate-50/70 px-4 py-3 text-sm text-slate-800">
+            <div class="flex items-center justify-between">
+              <span class="font-semibold text-slate-900">Checklist coverage</span>
+              <span class="text-slate-700">{{ caseFootprint().checklistCoverage }}%</span>
+            </div>
+            <div class="mt-2 h-2 rounded-full bg-slate-200">
+              <div
+                class="h-full rounded-full bg-rose-500 transition-all"
+                [style.width.%]="caseFootprint().checklistCoverage"
+              ></div>
+            </div>
+          </div>
+          <div
+            class="flex items-center justify-between rounded-2xl bg-rose-50 px-4 py-3 text-sm font-semibold text-rose-800 ring-1 ring-rose-100"
+          >
+            <span>Monte Carlo runs</span>
+            <span class="text-rose-700">
+              {{ form.controls.simulation.controls.casesToSimulate.value | number }} cases
+            </span>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div
+    class="flex flex-wrap items-center justify-between gap-3 rounded-3xl border border-slate-100 bg-white/90 p-4 shadow-sm backdrop-blur"
+  >
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-wide text-slate-600">Submit to console</p>
+      <p class="text-sm text-slate-700">
+        For now submission just logs the full payload. Wire to simulator-core next.
+      </p>
+    </div>
+    <button
+      type="submit"
+      class="inline-flex items-center gap-2 rounded-full bg-rose-600 px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-white shadow-sm transition hover:bg-rose-700"
+    >
+      Run simulation
+    </button>
+  </div>
+</form>
