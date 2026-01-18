@@ -26,8 +26,8 @@ This starter provides:
 Clone this repository and install dependencies:
 
 ```bash
-git clone https://github.com/your-username/angular-mat-tailwind-starter.git
-cd angular-mat-tailwind-starter
+git clone https://github.com/your-username/collatix.git
+cd collatix
 
 nvm install lts/jod
 nvm use lts/jod
