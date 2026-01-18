@@ -202,7 +202,7 @@
         </div>
 
         <div class="space-y-4" formArrayName="packSlots">
-          @for (slot of packSlots.controls; track trackSlot($index, slot); let i = $index) {
+          @for (slot of packSlots.controls; track trackSlot($index); let i = $index) {
           <div
             class="space-y-3 rounded-2xl border border-slate-100 bg-slate-50/70 p-4"
             [formGroupName]="i"
