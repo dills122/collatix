@@ -1,0 +1,116 @@
+<div class="min-h-screen bg-gradient-to-br from-rose-50 via-white to-slate-50 text-slate-900">
+  <div class="mx-auto flex max-w-6xl flex-col gap-10 px-6 py-12">
+    <header class="flex flex-col gap-6">
+      <div class="inline-flex w-fit items-center gap-2 rounded-full bg-rose-100/70 px-4 py-2 text-sm font-medium text-rose-800 shadow-sm ring-1 ring-rose-200">
+        <span class="h-2 w-2 rounded-full bg-rose-500 shadow-[0_0_0_4px] shadow-rose-200 animate-pulse"></span>
+        Simulation lab
+        <span class="text-slate-500">Work in progress</span>
+      </div>
+
+      <div class="space-y-3">
+        <h1 class="text-4xl font-semibold tracking-tight">Simulate Product Collation</h1>
+        <p class="max-w-3xl text-lg leading-relaxed text-slate-700">
+          Build a set, define the pack recipe, and let the simulator stress-test how often collectors pull repeats versus
+          spreading the checklist evenly across a case. This page will soon host the full configuration form.
+        </p>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-3">
+        <div class="rounded-2xl border border-rose-100 bg-white/80 p-4 shadow-sm backdrop-blur">
+          <p class="text-xs font-semibold uppercase tracking-wide text-rose-700">Inputs</p>
+          <p class="mt-2 text-sm text-slate-700">Case size, pack slots, rarity curve, and any chase rules that bend the odds.</p>
+        </div>
+        <div class="rounded-2xl border border-rose-100 bg-white/80 p-4 shadow-sm backdrop-blur">
+          <p class="text-xs font-semibold uppercase tracking-wide text-rose-700">Engine</p>
+          <p class="mt-2 text-sm text-slate-700">Thousands of simulated cases, seeded randomness, and safeguards to keep distribution honest.</p>
+        </div>
+        <div class="rounded-2xl border border-rose-100 bg-white/80 p-4 shadow-sm backdrop-blur">
+          <p class="text-xs font-semibold uppercase tracking-wide text-rose-700">Outputs</p>
+          <p class="mt-2 text-sm text-slate-700">Duplication risk, slot heatmaps, and a collation score so you can tweak before printing.</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="grid gap-6 lg:grid-cols-3">
+      <article class="lg:col-span-2 space-y-5 rounded-3xl border border-slate-100 bg-white/90 p-6 shadow-sm backdrop-blur">
+        <div class="flex items-center justify-between gap-3">
+          <h2 class="text-xl font-semibold text-slate-900">Configuration</h2>
+          <span class="rounded-full bg-rose-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-rose-700">
+            Form coming soon
+          </span>
+        </div>
+        <p class="text-slate-700">
+          Drop the form here when it is ready. Until then, the checklist below captures the inputs the simulator will expect.
+        </p>
+
+        <ul class="grid gap-3 md:grid-cols-2">
+          <li class="flex gap-3 rounded-xl bg-slate-50/70 p-3 ring-1 ring-slate-100">
+            <span class="mt-1 h-2.5 w-2.5 rounded-full bg-rose-500"></span>
+            <div>
+              <p class="font-medium text-slate-900">Product blueprint</p>
+              <p class="text-sm text-slate-600">Checklist name, total cards, rarity tiers, and parallel counts.</p>
+            </div>
+          </li>
+          <li class="flex gap-3 rounded-xl bg-slate-50/70 p-3 ring-1 ring-slate-100">
+            <span class="mt-1 h-2.5 w-2.5 rounded-full bg-rose-500"></span>
+            <div>
+              <p class="font-medium text-slate-900">Pack recipe</p>
+              <p class="text-sm text-slate-600">Number of slots per pack, slot rules, guaranteed hits, and foil bias.</p>
+            </div>
+          </li>
+          <li class="flex gap-3 rounded-xl bg-slate-50/70 p-3 ring-1 ring-slate-100">
+            <span class="mt-1 h-2.5 w-2.5 rounded-full bg-rose-500"></span>
+            <div>
+              <p class="font-medium text-slate-900">Case definition</p>
+              <p class="text-sm text-slate-600">Packs per box, boxes per case, and how often to shuffle or reseed randomness.</p>
+            </div>
+          </li>
+          <li class="flex gap-3 rounded-xl bg-slate-50/70 p-3 ring-1 ring-slate-100">
+            <span class="mt-1 h-2.5 w-2.5 rounded-full bg-rose-500"></span>
+            <div>
+              <p class="font-medium text-slate-900">Simulation knobs</p>
+              <p class="text-sm text-slate-600">Number of runs, random seed, and a toggle for perfect vs imperfect collation.</p>
+            </div>
+          </li>
+        </ul>
+
+        <div class="rounded-2xl border border-dashed border-slate-200 bg-slate-50/70 p-5 text-sm text-slate-700">
+          Placeholder: mount <code class="rounded bg-slate-900/90 px-2 py-0.5 text-xs text-white">app-simulation-form</code> here when the form is ready.
+        </div>
+      </article>
+
+      <aside class="space-y-4">
+        <div class="rounded-2xl bg-slate-900 p-5 text-slate-100 shadow-lg">
+          <h3 class="text-lg font-semibold">What the simulation tells you</h3>
+          <p class="mt-2 text-sm text-slate-200">
+            A quick preview of the signals you will see once results are wired up.
+          </p>
+          <ul class="mt-4 space-y-3 text-sm">
+            <li class="flex gap-3">
+              <span class="mt-1 h-2 w-2 rounded-full bg-emerald-400"></span>
+              <span>Collation score: how evenly the checklist is distributed within each case.</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="mt-1 h-2 w-2 rounded-full bg-amber-300"></span>
+              <span>Duplication risk: likelihood a buyer sees the same hit twice across a case.</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="mt-1 h-2 w-2 rounded-full bg-sky-300"></span>
+              <span>Slot heatmap: which pack slots run hot or cold for certain rarities.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="rounded-2xl border border-slate-100 bg-white/90 p-5 shadow-sm backdrop-blur">
+          <h3 class="text-base font-semibold text-slate-900">Quick setup cheatsheet</h3>
+          <ul class="mt-3 space-y-2 text-sm text-slate-700">
+            <li>Start small: 4-8 pack slots, 2 rarity tiers, and a single chase card.</li>
+            <li>Increase complexity: add parallels and force one guaranteed hit per box.</li>
+            <li>Check variance: run 100+ cases to see if collation drifts as volume grows.</li>
+          </ul>
+          <p class="mt-3 text-xs text-slate-500">Once the form lands here, these tips can live alongside validation hints.</p>
+        </div>
+      </aside>
+    </section>
+  </div>
+</div>
