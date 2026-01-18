@@ -2,9 +2,13 @@
 import eslint from '@eslint/js';
 import angular from 'angular-eslint';
 import prettier from 'eslint-config-prettier';
+import eslintPluginJsonc from 'eslint-plugin-jsonc';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
+  {
+    ignores: ['**/*.spec.ts'],
+  },
   {
     files: ['**/*.ts'],
     extends: [
@@ -36,6 +40,11 @@ export default tseslint.config(
   {
     files: ['**/*.html'],
     extends: [...angular.configs.templateRecommended, ...angular.configs.templateAccessibility],
+    rules: {},
+  },
+  {
+    files: ['**/*.json', '**/*.jsonc'],
+    extends: [...eslintPluginJsonc.configs['flat/recommended-with-jsonc']],
     rules: {},
   },
   prettier
