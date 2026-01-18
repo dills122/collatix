@@ -12,7 +12,7 @@ import {
 type SlotType = 'base' | 'insert' | 'hit';
 type PrintStrategy = 'print-run' | 'odds-first';
 type ReadinessStatus = 'ok' | 'warn' | 'info';
-type FormPreset = {
+interface FormPreset {
   name: string;
   summary: string;
   payload: {
@@ -36,7 +36,7 @@ type FormPreset = {
       varianceControl: boolean;
     };
   };
-};
+}
 
 type PackSlotFormGroup = FormGroup<{
   label: FormControl<string>;
@@ -46,19 +46,19 @@ type PackSlotFormGroup = FormGroup<{
   notes: FormControl<string>;
 }>;
 
-type PackSlotInit = {
+interface PackSlotInit {
   label?: string;
   type: SlotType;
   odds?: string;
   replaces?: SlotType;
   notes?: string;
-};
+}
 
-type ReadinessCheck = {
+interface ReadinessCheck {
   title: string;
   detail: string;
   status: ReadinessStatus;
-};
+}
 
 @Component({
   selector: 'app-simulation-form',
@@ -342,7 +342,7 @@ export class SimulationForm {
     this.packSlots.removeAt(index);
   }
 
-  protected trackSlot = (index: number, _slot: PackSlotFormGroup): number => index;
+  protected trackSlot = (index: number): number => index;
 
   protected loadPreset(preset: FormPreset): void {
     const payload = preset.payload;
@@ -371,7 +371,7 @@ export class SimulationForm {
 
     const payload = this.form.getRawValue();
     // For now we just log the submission payload.
-    // eslint-disable-next-line no-console
+
     console.log('Simulation request payload', payload);
   }
 
