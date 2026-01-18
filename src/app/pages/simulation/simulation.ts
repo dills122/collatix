@@ -8,5 +8,4 @@ import { SimulationForm } from '../../components/simulation-form/simulation-form
   templateUrl: './simulation.html',
   styleUrl: './simulation.scss',
 })
-export class Simulation {
-}
+export class Simulation {}
